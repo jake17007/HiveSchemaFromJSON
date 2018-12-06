@@ -34,7 +34,7 @@ class Table:
         hql.append(')')
         if self.description:
             hql.append('COMMENT \'{}\''.format(self.description))
-        hql.append('ROW FORMAT DELMITED')
+        hql.append('ROW FORMAT DELIMITED')
         hql.append('FIELDS TERMINATED BY \'{}\''.format(
             self.delimiter))
         hql.append('STORED AS {}'.format(self.stored_as))
