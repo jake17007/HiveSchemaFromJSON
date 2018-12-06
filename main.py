@@ -1,20 +1,19 @@
 import json
+import sys
 
 from schema import Schema
 
-INPUT_SCHEMA_FILE = '../schema/schema.json'
-OUTPUT_HQL_SCRIPT = 'schema.hql'
 
+def main(input_schema_file, output_hql_script):
 
-def main():
     # Read schema JSON in as dictionary
-    with open(INPUT_SCHEMA_FILE) as f:
+    with open(input_schema_file) as f:
         schema_dict = json.load(f)
         # Construct the schema
         schema = Schema(schema_dict)
 
     # Write the HQL create script to the specified output file
-    with open(OUTPUT_HQL_SCRIPT, 'w+') as f:
+    with open(output_hql_script, 'w+') as f:
         f.write(schema.to_hql_create_script())
 
     '''
@@ -30,4 +29,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) != 3:
+        print('You must provide input and output file arguments.')
+    else:
+        main_file, input_schema_file, output_hql_script = sys.argv
+        main(input_schema_file, output_hql_script)
